@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
+import java.util.Date;
+
 @Entity
 public class Comment {
     @Id   @GeneratedValue
@@ -13,6 +15,26 @@ public class Comment {
     private String comment;
     @ManyToOne
     private Post post;
+
+    private Date created;
+
+    private Integer likeCount;
+
+    public Integer getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Integer like) {
+        this.likeCount = like;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
     public Long getId() {
         return Id;
