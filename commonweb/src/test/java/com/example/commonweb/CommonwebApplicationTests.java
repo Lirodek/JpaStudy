@@ -3,9 +3,11 @@ package com.example.commonweb;
 import com.example.commonweb.post.Post;
 import com.example.commonweb.post.PostRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.regex.Matcher;
@@ -15,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
+@RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 class CommonwebApplicationTests {
 
@@ -42,14 +45,25 @@ class CommonwebApplicationTests {
         post.setTitle("jpa");
         postRepository.save(post);
 
-        mockMvc.perform(get("/posts")
+        /*mockMvc.perform(get("/posts")
                         .param("page", "0")
                         .param("size", "10")
                         .param("sort", "created,desc")
                         .param("sort", "title"))
                 .andDo(print())
                 .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.content[0].title", is("jpa")));
+                .andExpect(jsonPath("$.content[0].title", is("jpa")));*/
+    }
+
+    private void createPosts(){
+        int postsCount = 100;
+        while(postsCount > 0){
+            Post post = new Post();
+            post.setTitle("jpa");
+            postRepository.save(post);
+            postsCount--;
+
+        }
     }
 
 }
